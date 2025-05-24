@@ -1,8 +1,6 @@
 const path = require('path');
-
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-
 const appDirectory = path.resolve(__dirname);
 const {presets} = require(`${appDirectory}/babel.config.js`);
 
@@ -13,10 +11,9 @@ const compileNodeModules = [
 
 const babelLoaderConfiguration = {
   test: /\.js$|tsx?$/,
-  // Add every directory that needs to be compiled by Babel during the build.
   include: [
-    path.resolve(__dirname, 'index.web.js'), // Entry to your application
-    path.resolve(__dirname, 'App.web.tsx'), // Change this to your main App file
+    path.resolve(__dirname, 'index.web.js'),
+    path.resolve(__dirname, 'App.js'),
     path.resolve(__dirname, 'src'),
     ...compileNodeModules,
   ],
@@ -77,8 +74,18 @@ module.exports = {
     }),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.DefinePlugin({
-      // See: https://github.com/necolas/react-native-web/issues/349
       __DEV__: JSON.stringify(true),
     }),
   ],
+  devServer: {
+    static: {
+      directory: path.join(__dirname, 'dist'),
+    },
+    historyApiFallback: true,
+    compress: true,
+    port: 3000,
+    hot: true,
+    open: true,
+    liveReload: true,
+  },
 };
