@@ -7,9 +7,9 @@ import {
   textScale,
   width,
 } from '../../styles/responsiveSize';
-import LottieView from 'lottie-react-native';
 import colors from '../../styles/colors';
 import BottomSheetComp from '../common/BottomSheetComp';
+import LottieWrapper from './LottieWrapper';
 
 const NoInternetWrapper = ({children}) => {
   const [isOffline, setIsOffline] = useState(false);
@@ -43,10 +43,8 @@ const NoInternetWrapper = ({children}) => {
       <BottomSheetComp ref={bottomSheetRef} snapPointsProp={snapPoints}>
         <View style={styles.content}>
           <View style={styles.illustrationContainer}>
-            <LottieView
+            <LottieWrapper
               source={require('../../assets/animation/NoInternetImage/NoInternet2.json')}
-              autoPlay
-              loop
               style={styles.imageStyles}
             />
 

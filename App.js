@@ -7,10 +7,8 @@ import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import ConnectivityProvider from './src/components/basic-comp/ConnectivityProvider';
 import NoInternetWrapper from './src/components/basic-comp/NoInternetComp';
 import ForceUpdateWrapper from './src/components/basic-comp/ForceUpdateWrapper';
-import FlashMessage from 'react-native-flash-message';
-import fontFamily from './src/styles/fontFamily';
-import {textScale} from './src/styles/responsiveSize';
 import Routes from './src/navigation/Routes';
+import ToastWrapper from './src/components/basic-comp/ToastWrapper';
 
 export default function App() {
   LogBox.ignoreAllLogs();
@@ -22,13 +20,7 @@ export default function App() {
           <NoInternetWrapper>
             <ForceUpdateWrapper>
               <Routes />
-              <FlashMessage
-                position={'top'}
-                titleStyle={{
-                  fontFamily: fontFamily.mornRegular,
-                  fontSize: textScale(14),
-                }}
-              />
+              <ToastWrapper />
             </ForceUpdateWrapper>
           </NoInternetWrapper>
         </ConnectivityProvider>

@@ -3,6 +3,7 @@ import {changeAppTheme, changeLanguage} from '../redux/actions/appSettings';
 import {showMessage} from 'react-native-flash-message';
 import colors from '../styles/colors';
 import {saveUserData} from '../redux/reducers/auth';
+import {toast} from 'react-hot-toast';
 
 export const storeData = async (key, value) => {
   try {
@@ -87,25 +88,36 @@ export const initUserData = async dispatch => {
 };
 
 export const showError = message => {
-  showMessage({
-    message,
-    type: 'danger',
-    backgroundColor: colors.red,
-    color: colors.white,
-    duration: 2000,
-  });
+  if (Platform.OS === 'web') {
+    toast.error(message, {
+      duration: 2000,
+    });
+  } else {
+    showMessage({
+      message,
+      type: 'danger',
+      backgroundColor: colors.red,
+      color: colors.white,
+      duration: 2000,
+    });
+  }
 };
 
 export const showSuccess = message => {
-  showMessage({
-    message,
-    type: 'success',
-    backgroundColor: colors.lightGreen,
-    color: colors.white,
-    duration: 2500,
-  });
+  if (Platform.OS === 'web') {
+    toast.success(message, {
+      duration: 2000,
+    });
+  } else {
+    showMessage({
+      message,
+      type: 'success',
+      backgroundColor: colors.lightGreen,
+      color: colors.white,
+      duration: 2000,
+    });
+  }
 };
-
 // chatBlack user modal alert
 export const showConfirmationDialog = (
   title,
